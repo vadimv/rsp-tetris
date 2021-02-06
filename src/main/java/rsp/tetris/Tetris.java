@@ -19,6 +19,11 @@ import static rsp.dsl.Html.*;
 public class Tetris {
     public static final int DEFAULT_PORT = 8080;
 
+    private static final String LEFT_KEY = "37";
+    private static final String RIGHT_KEY = "39";
+    private static final String DOWN_KEY = "40";
+    private static final String UP_KEY = "38";
+
     public static void main(String[] args) throws Exception {
         final Map<String, ScheduledFuture<?>> timers = new ConcurrentHashMap<>();
         final Component<State> component = useState ->
@@ -26,10 +31,10 @@ public class Tetris {
                         final String keyCode = c.eventObject().value("keyCode").map(Object::toString).orElse("noKeyCode");
                         final State s = useState.get();
                         switch (keyCode) {
-                            case "37": s.tryMoveLeft().ifPresent(ns -> useState.accept(ns)); break;
-                            case "39": s.tryMoveRight().ifPresent(ns -> useState.accept(ns)); break;
-                            case "40": s.tryMoveDown().ifPresent(ns -> useState.accept(ns)); break;
-                            case "38": s.tryRotate().ifPresent(ns -> useState.accept(ns)); break;
+                            case LEFT_KEY  : s.tryMoveLeft().ifPresent(ns -> useState.accept(ns)); break;
+                            case RIGHT_KEY : s.tryMoveRight().ifPresent(ns -> useState.accept(ns)); break;
+                            case DOWN_KEY  : s.tryMoveDown().ifPresent(ns -> useState.accept(ns)); break;
+                            case UP_KEY    : s.tryRotate().ifPresent(ns -> useState.accept(ns)); break;
                         }
                     }),
                 head(link(attr("rel", "stylesheet"), attr("href","/res/style.css"))),
