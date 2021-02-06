@@ -1,6 +1,10 @@
 # RSP Tetris
 
+A Java Tetris game clone for the browser.
+
 ## Usage
+
+This project requires Java 11 or newer.
 
 ```shell script
 $ mvn clean package
