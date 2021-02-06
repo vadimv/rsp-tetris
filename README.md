@@ -1,1 +1,1 @@
-# rsp-tetris
+# RSP Tetris
