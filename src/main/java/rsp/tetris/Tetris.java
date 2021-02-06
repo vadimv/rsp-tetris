@@ -47,19 +47,19 @@ public class Tetris {
                         div(attr("id", "score"), text("Score: " + useState.get().score())),
                         div(attr("id", "start"),
                             button(attr("id", "start-btn"), attr("type", "button"),
-                               when(useState.get().isRunning, () -> attr("disabled")),
-                               text("Start"),
-                               on("click", c -> {
-                                   State.initialState().start().newTetramino().ifPresent(ns -> useState.accept(ns));
-                                   timers.put(c.sessionId().sessionId,
-                                              c.scheduleAtFixedRate(() -> useState.acceptOptional(
-                                                      s -> s.tryMoveDown()
-                                                            .or(() -> s.newTetramino())
-                                                            .or(() -> {
-                                                               timers.get(c.sessionId().sessionId).cancel(false);
-                                                               return Optional.of(s.stop());
-                                   })), 0, 1, TimeUnit.SECONDS));
-                               })))))));
+                                   when(useState.get().isRunning, () -> attr("disabled")),
+                                   text("Start"),
+                                   on("click", c -> {
+                                       State.initialState().start().newTetramino().ifPresent(ns -> useState.accept(ns));
+                                       timers.put(c.sessionId().sessionId,
+                                                  c.scheduleAtFixedRate(() -> useState.acceptOptional(
+                                                          s -> s.tryMoveDown()
+                                                                .or(() -> s.newTetramino())
+                                                                .or(() -> {
+                                                                   timers.get(c.sessionId().sessionId).cancel(false);
+                                                                   return Optional.of(s.stop());
+                                       })), 0, 1, TimeUnit.SECONDS));
+                                   })))))));
         final var s = new JettyServer(DEFAULT_PORT,
                                      "",
                                       new App(State.initialState(),
