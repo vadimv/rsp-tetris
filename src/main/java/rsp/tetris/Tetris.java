@@ -8,24 +8,28 @@ import rsp.server.StaticResources;
 import java.io.File;
 import java.nio.CharBuffer;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import static rsp.dsl.Html.*;
 
+/**
+ * A Tetris game single-page application.
+ */
 public class Tetris {
-    public static final int DEFAULT_PORT = 8080;
+    private static final int SERVER_PORT = 8080;
 
+    /**
+     * Arrow keys keycodes:
+     */
     private static final String LEFT_KEY = "37";
     private static final String RIGHT_KEY = "39";
     private static final String DOWN_KEY = "40";
     private static final String UP_KEY = "38";
 
+    private static final String TIMER_NAME = "timer0";
+
     public static void main(String[] args) throws Exception {
-        final Map<String, ScheduledFuture<?>> timers = new ConcurrentHashMap<>();
         final Component<State> component = useState ->
             html(on("keydown", false, c -> {
                         final String keyCode = c.eventObject().value("keyCode").map(Object::toString).orElse("noKeyCode");
@@ -50,17 +54,17 @@ public class Tetris {
                                    when(useState.get().isRunning, () -> attr("disabled")),
                                    text("Start"),
                                    on("click", c -> {
-                                       State.initialState().start().newTetramino().ifPresent(ns -> useState.accept(ns));
-                                       timers.put(c.sessionId().sessionId,
+                                                  State.initialState().start().newTetramino().ifPresent(ns -> useState.accept(ns));
                                                   c.scheduleAtFixedRate(() -> useState.acceptOptional(
                                                           s -> s.tryMoveDown()
                                                                 .or(() -> s.newTetramino())
                                                                 .or(() -> {
-                                                                   timers.get(c.sessionId().sessionId).cancel(false);
+                                                                   c.cancelSchedule(TIMER_NAME);
                                                                    return Optional.of(s.stop());
-                                       })), 0, 1, TimeUnit.SECONDS));
+                                       })), TIMER_NAME,0, 1, TimeUnit.SECONDS);
                                    })))))));
-        final var s = new JettyServer(DEFAULT_PORT,
+
+        final var s = new JettyServer(SERVER_PORT,
                                      "",
                                       new App(State.initialState(),
                                               component),
