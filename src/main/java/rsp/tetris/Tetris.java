@@ -61,7 +61,7 @@ public class Tetris {
                                                                 .or(() -> {
                                                                    c.cancelSchedule(TIMER_NAME);
                                                                    return Optional.of(s.stop());
-                                       })), TIMER_NAME,0, 1, TimeUnit.SECONDS);
+                                       })), TIMER_NAME, 0, 1, TimeUnit.SECONDS);
                                    })))))));
 
         final var s = new JettyServer(SERVER_PORT,
