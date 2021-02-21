@@ -1,4 +1,4 @@
-# RSP Tetris
+# ЯSP TETЯIS
 
 A Java Tetris game clone for the browser.
 
