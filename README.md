@@ -1,6 +1,6 @@
 # RSP Tetris
 
-A Java Tetris game clone for the browser.
+A Tetris game for the browser with server-side rendering, written in Java.
 
 ## Usage
 
@@ -13,5 +13,9 @@ $ java -jar ./target/rsp-tetris-0.1-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 Navigate to http://localhost:8080
+
+Use arrow keys:  
+← → ↓  
+↑ rotate
 
 ![Tetris](tetris_sample.gif)
