@@ -3,6 +3,7 @@ package rsp.tetris;
 import rsp.App;
 import rsp.Component;
 import rsp.jetty.JettyServer;
+import rsp.ref.TimerRef;
 import rsp.server.StaticResources;
 
 import java.io.File;
@@ -27,7 +28,7 @@ public class Tetris {
     private static final String DOWN_KEY = "40";
     private static final String UP_KEY = "38";
 
-    private static final String TIMER_NAME = "timer0";
+    private static final TimerRef FALLING_ITEMS_TIMER = TimerRef.createTimerRef();
 
     public static void main(String[] args) throws Exception {
         final Component<State> component = useState ->
@@ -59,9 +60,9 @@ public class Tetris {
                                                           s -> s.tryMoveDown()
                                                                 .or(() -> s.newTetramino())
                                                                 .or(() -> {
-                                                                   c.cancelSchedule(TIMER_NAME);
+                                                                   c.cancelSchedule(FALLING_ITEMS_TIMER);
                                                                    return Optional.of(s.stop());
-                                       })), TIMER_NAME, 0, 1, TimeUnit.SECONDS);
+                                       })), FALLING_ITEMS_TIMER, 0, 1, TimeUnit.SECONDS);
                                    })))))));
 
         final var s = new JettyServer(SERVER_PORT,
