@@ -42,7 +42,8 @@ public class Tetris {
                             case UP_KEY    : s.tryRotate().ifPresent(ns -> useState.accept(ns)); break;
                         }
                     }),
-                head(link(attr("rel", "stylesheet"), attr("href","/res/style.css"))),
+                head(title("Tetris"),
+                     link(attr("rel", "stylesheet"), attr("href","/res/style.css"))),
                 body(div(attr("class", "tetris-wrapper"),
                     div(attr("class", "stage"),
                         of(Arrays.stream(useState.get().stage.cells()).flatMap(row ->
