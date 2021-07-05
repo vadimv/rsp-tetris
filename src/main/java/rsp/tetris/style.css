@@ -13,7 +13,7 @@
 
 #score {
    float:left;
-   margin: 10px;
+   margin: 5px 10px 250px 10px;
 }
 
 #start {
@@ -23,7 +23,12 @@
 }
 
 #start-btn {
-    padding: 5px 10px;
+    margin: 10px 5px 5px 5px;
+    padding: 5px 20px;
+}
+
+.score-text {
+    margin: 20px;
 }
 
 .stage {

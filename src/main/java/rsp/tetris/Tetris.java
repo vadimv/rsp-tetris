@@ -49,7 +49,9 @@ public class Tetris {
                                 CharBuffer.wrap(row).chars().mapToObj(i -> (char)i)).map(cell ->
                                     div(attr("class", "cell t" + cell))))),
                     div(attr("class", "sidebar"),
-                        div(attr("id", "score"), text("Score: " + useState.get().score())),
+                        div(attr("id", "score"),
+                            span(attr("class", "score-text"),
+                                 text(String.format("%06d", useState.get().score())))),
                         div(attr("id", "start"),
                             button(attr("id", "start-btn"), attr("type", "button"),
                                    when(useState.get().isRunning, () -> attr("disabled")),
@@ -63,7 +65,9 @@ public class Tetris {
                                                                    c.cancelSchedule(FALLING_ITEMS_TIMER);
                                                                    return Optional.of(s.stop());
                                        })), FALLING_ITEMS_TIMER, 0, 1, TimeUnit.SECONDS);
-                                   })))))));
+                                   })),
+                            p("← → ↓ move"),
+                            p("↑ rotate"))))));
 
         final var s = new JettyServer(SERVER_PORT,
                                      "",
