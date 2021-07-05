@@ -18,4 +18,4 @@ Use arrow keys:
 ← → ↓  
 ↑ rotate
 
-![Tetris](tetris_sample.gif)
+![Tetris](tetris.png)
