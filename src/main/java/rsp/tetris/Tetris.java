@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static rsp.dsl.Html.*;
+import static rsp.html.HtmlDsl.*;
 
 /**
  * A Tetris game single-page application.
@@ -43,6 +43,10 @@ public class Tetris {
                         }
                     }),
                 head(title("Tetris"),
+                                       /*     link(attr("rel", "preconnect"), attr("href","https://fonts.googleapis.com")),
+                     link(attr("rel", "preconnect"), attr("href","https://fonts.gstatic.com"), attr("crossorigin")),
+                     link(attr("rel", "stylesheet"), attr("href","https://fonts.googleapis.com/css2?family=VT323&display=swap")),
+               */
                      link(attr("rel", "stylesheet"), attr("href","/res/style.css"))),
                 body(div(attr("class", "tetris-wrapper"),
                     div(attr("class", "stage"),

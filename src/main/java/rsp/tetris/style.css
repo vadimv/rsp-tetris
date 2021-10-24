@@ -1,3 +1,8 @@
+body {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
 .tetris-wrapper {
     display: flex;
 }
@@ -23,11 +28,13 @@
 }
 
 #start-btn {
-    margin: 10px 5px 5px 5px;
-    padding: 5px 20px;
+    font-family: inherit;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 10px;
 }
 
 .score-text {
+    font-size: 20px;
     margin: 20px;
 }
 
@@ -38,6 +45,7 @@
     grid-gap: 1px;
     width: 100%;
     max-width: 240px;
+
 
 }
 
@@ -51,36 +59,36 @@
 }
 
 .tI {
-    background: rgba(80, 227, 230, 0.8);
-    border: 3px solid;
+    background-image: url("img/blue.png");
+    border: 1px solid;
 }
 
 .tJ {
-    background: rgba(36, 95, 223, 0.8);
-    border: 3px solid;
+    background-image: url("img/gray.png");
+    border: 1px solid;
 }
 
 .tL {
-    background: rgba(223, 173, 36, 0.8);
-    border: 3px solid;
+    background-image: url("img/green.png");
+    border: 1px solid;
 }
 
 .tO {
-    background: rgba(223, 217, 36, 0.8);
-    border: 3px solid;
+    background-image: url("img/orange.png");
+    border: 1px solid;
 }
 
 .tS {
-    background: rgba(48, 211, 56, 0.8);
-    border: 3px solid;
+    background-image: url("img/red.png");
+    border: 1px solid;
 }
 
 .tT {
-    background: rgba(132, 61, 198, 0.8);
-    border: 3px solid;
+    background-image: url("img/white.png");
+    border: 1px solid;
 }
 
 .tZ {
-    background: rgba(227, 78, 78, 0.8);
-    border: 3px solid;
+    background-image: url("img/yellow.png");
+    border: 1px solid;
 }
