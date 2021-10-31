@@ -30,7 +30,7 @@ public class Tetris {
 
     private static final TimerRef FALLING_ITEMS_TIMER = TimerRef.createTimerRef();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         final Component<State> component = useState ->
             html(on("keydown", false, c -> {
                         final String keyCode = c.eventObject().value("keyCode").map(Object::toString).orElse("noKeyCode");
@@ -48,31 +48,37 @@ public class Tetris {
                      link(attr("rel", "stylesheet"), attr("href","https://fonts.googleapis.com/css2?family=VT323&display=swap")),
                */
                      link(attr("rel", "stylesheet"), attr("href","/res/style.css"))),
-                body(div(attr("class", "tetris-wrapper"),
-                    div(attr("class", "stage"),
-                        of(Arrays.stream(useState.get().stage.cells()).flatMap(row ->
-                                CharBuffer.wrap(row).chars().mapToObj(i -> (char)i)).map(cell ->
-                                    div(attr("class", "cell t" + cell))))),
-                    div(attr("class", "sidebar"),
-                        div(attr("id", "score"),
-                            span(attr("class", "score-text"),
-                                 text(String.format("%06d", useState.get().score())))),
-                        div(attr("id", "start"),
-                            button(attr("id", "start-btn"), attr("type", "button"),
-                                   when(useState.get().isRunning, () -> attr("disabled")),
-                                   text("Start"),
-                                   on("click", c -> {
-                                                  State.initialState().start().newTetramino().ifPresent(ns -> useState.accept(ns));
-                                                  c.scheduleAtFixedRate(() -> useState.acceptOptional(
-                                                          s -> s.tryMoveDown()
-                                                                .or(() -> s.newTetramino())
-                                                                .or(() -> {
-                                                                   c.cancelSchedule(FALLING_ITEMS_TIMER);
-                                                                   return Optional.of(s.stop());
-                                       })), FALLING_ITEMS_TIMER, 0, 1, TimeUnit.SECONDS);
-                                   })),
-                            p("← → ↓ move"),
-                            p("↑ rotate"))))));
+                body(div(attr("id", "header")),
+                     div(attr("id", "content"),
+                        div(attr("class", "left-column")),
+                        div(attr("class", "tetris-wrapper"),
+                        div(attr("class", "stage"),
+                            of(Arrays.stream(useState.get().stage.cells()).flatMap(row ->
+                                    CharBuffer.wrap(row).chars().mapToObj(i -> (char)i)).map(cell ->
+                                        div(attr("class", "cell t" + cell))))),
+                        div(attr("class", "sidebar"),
+                            div(attr("id", "score"),
+                                span(attr("class", "score-text"),
+                                     text(String.format("%06d", useState.get().score())))),
+                            div(attr("id", "start"),
+                                button(attr("id", "start-btn"), attr("type", "button"),
+                                       when(useState.get().isRunning, () -> attr("disabled")),
+                                       text("Start"),
+                                       on("click", c -> {
+                                                      State.initialState().start().newTetramino().ifPresent(ns -> useState.accept(ns));
+                                                      c.scheduleAtFixedRate(() -> useState.acceptOptional(
+                                                              s -> s.tryMoveDown()
+                                                                    .or(() -> s.newTetramino())
+                                                                    .or(() -> {
+                                                                       c.cancelSchedule(FALLING_ITEMS_TIMER);
+                                                                       return Optional.of(s.stop());
+                                           })), FALLING_ITEMS_TIMER, 0, 1, TimeUnit.SECONDS);
+                                       })),
+                                p("← → ↓ move"),
+                                p("↑ rotate")))),
+                        div(attr("class", "right-column"))
+                ),
+                        div(attr("id", "footer"))));
 
         final var s = new JettyServer(SERVER_PORT,
                                      "",
