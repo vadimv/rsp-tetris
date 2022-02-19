@@ -23,7 +23,7 @@ body {
 }
 
 .tetris-wrapper {
-    min-width: 500px;
+    min-width: 400px;
     display: flex;
     flex:1;
 }
@@ -39,7 +39,7 @@ body {
 
 #score {
    float:left;
-   margin: 5px 10px 250px 10px;
+   margin: 5px 10px 140px 10px;
 }
 
 #start {
@@ -56,17 +56,15 @@ body {
 
 .score-text {
     font-size: 20px;
-    margin: 20px;
 }
 
 .stage {
     display: grid;
     grid-template-rows: repeat(20, 20px);
     grid-template-columns: repeat(12, 20px);
-    grid-gap: 1px;
-    width: 100%;
-    max-width: 240px;
-
+    grid-gap: 0px;
+    border: 1px;
+  border: 1px solid;
 
 }
 
@@ -75,7 +73,6 @@ body {
 }
 
 .t0 {
-    background: rgba(211, 211, 211, 0.8);
     border: 0px solid;
 }
 

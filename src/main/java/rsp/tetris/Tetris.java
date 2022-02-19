@@ -47,7 +47,8 @@ public class Tetris {
                      link(attr("rel", "preconnect"), attr("href","https://fonts.gstatic.com"), attr("crossorigin")),
                      link(attr("rel", "stylesheet"), attr("href","https://fonts.googleapis.com/css2?family=VT323&display=swap")),
                */
-                     link(attr("rel", "stylesheet"), attr("href","/res/style.css"))),
+                     link(attr("rel", "stylesheet"), attr("href","/res/style.css")),
+                     meta(attr("http-equiv","Content-Type"), attr("content", "text/html; charset=UTF-8"))),
                 body(div(attr("id", "header")),
                      div(attr("id", "content"),
                         div(attr("class", "left-column")),
@@ -58,6 +59,7 @@ public class Tetris {
                                         div(attr("class", "cell t" + cell))))),
                         div(attr("class", "sidebar"),
                             div(attr("id", "score"),
+                                p("SCORE"),
                                 span(attr("class", "score-text"),
                                      text(String.format("%06d", useState.get().score())))),
                             div(attr("id", "start"),

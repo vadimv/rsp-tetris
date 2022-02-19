@@ -14,7 +14,7 @@ public class Stage {
 
     public final int collapsedLayersCount;
 
-    public Stage(char[][] cells, Tetromions.Tetromino tetramino, int tetraminoX, int tetraminoY, int collapsedLayersCount) {
+    private Stage(char[][] cells, Tetromions.Tetromino tetramino, int tetraminoX, int tetraminoY, int collapsedLayersCount) {
         this.cells = cells;
         this.tetramino = tetramino;
         this.tetraminoX = tetraminoX;
@@ -141,14 +141,14 @@ public class Stage {
         return tetraminoX == stage.tetraminoX &&
                 tetraminoY == stage.tetraminoY &&
                 collapsedLayersCount == stage.collapsedLayersCount &&
-                Arrays.equals(cells, stage.cells) &&
+                Arrays.deepEquals(cells, stage.cells) &&
                 tetramino.equals(stage.tetramino);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(tetramino, tetraminoX, tetraminoY, collapsedLayersCount);
-        result = 31 * result + Arrays.hashCode(cells);
+        result = 31 * result + Arrays.deepHashCode(cells);
         return result;
     }
 }
