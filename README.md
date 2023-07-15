@@ -9,7 +9,7 @@ This project requires Java 11 or newer.
 ```shell script
 $ mvn clean package
 
-$ java -jar ./target/rsp-tetris-0.1-SNAPSHOT-jar-with-dependencies.jar
+$ java -jar ./target/rsp-tetris-0.2-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 Navigate to http://localhost:8080
